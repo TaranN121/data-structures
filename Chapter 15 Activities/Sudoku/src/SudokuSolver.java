@@ -36,21 +36,50 @@ public class SudokuSolver {
         }
 
         // create the list of sets for each row (this.rows)
-        // ...
+        this.rows = new ArrayList<>();
+        for (int row = 0; row < N; row++) {
+            Set<Integer> set = new HashSet<>();
+            for (int col = 0; col < N; col++) {
+                if (this.grid[row][col] != 0) {
+                    set.add(this.grid[row][col]);
+                }
+            }
+            this.rows.add(set);
+        }
 
         // create the list of sets for each col (this.cols)
-        // ...
+        this.cols = new ArrayList<>();
+        for (int col = 0; col < N; col++) {
+            Set<Integer> set = new HashSet<>();
+            for (int row = 0; row < N; row++) {
+                if (this.grid[row][col] != 0) {
+                    set.add(this.grid[row][col]);
+                }
+            }
+            this.cols.add(set);
+        }
 
         // create the list of sets for each square (this.squares)
-        /* the squares are added to the list row-by-row:
-            0 1 2
-            3 4 5
-            6 7 8
-         */
-        // ...
+        this.squares = new ArrayList<>();
+        for (int square = 0; square < N; square++) {
+            this.squares.add(new HashSet<>());
+        }
+        for (int row = 0; row < N; row++) {
+            for (int col = 0; col < N; col++) {
+                int val = this.grid[row][col];
+                if (val != 0) {
+                    int squareIndex = (row / M) * M + (col / M);
+                    this.squares.get(squareIndex).add(val);
+                }
+            }
+        }
 
         // create a hash set for [1..9] (this.nums)
-        // ...
+        this.nums = new HashSet<>();
+        for (int i = 1; i <= N; i++) {
+            this.nums.add(i);
+        }
+
 
         // visually inspect that all the sets are correct
         for (int row = 0; row < N; row++) {
@@ -97,7 +126,11 @@ public class SudokuSolver {
         Set<Integer> possibleNums = new HashSet<Integer>();
         possibleNums.addAll(this.nums);
         
-        // ...
+       // Set<Integer> possibleNums = new HashSet<>(this.nums);
+        possibleNums.removeAll(this.rows.get(nextRow));
+        possibleNums.removeAll(this.cols.get(nextCol));
+        int squareIndex = (nextRow / M) * M + (nextCol / M);
+        possibleNums.removeAll(this.squares.get(squareIndex));
 
         // if there are no possible numbers, we cannot solve the board in its current state
         if (possibleNums.isEmpty()) {
@@ -107,7 +140,10 @@ public class SudokuSolver {
         // try each possible number
         for (Integer possibleNum : possibleNums) {
             // update the grid and all three corresponding sets with possibleNum
-            // ...
+            this.grid[nextRow][nextCol] = possibleNum;
+            this.rows.get(nextRow).add(possibleNum);
+            this.cols.get(nextCol).add(possibleNum);
+            this.squares.get(squareIndex).add(possibleNum);
 
             // recursively solve the board
             if (this.solve()) {
@@ -119,7 +155,10 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                // ...
+                this.grid[nextRow][nextCol] = 0;
+                this.rows.get(nextRow).remove(possibleNum);
+                this.cols.get(nextCol).remove(possibleNum);
+                this.squares.get(squareIndex).remove(possibleNum);
             }
         }
 
