@@ -18,8 +18,11 @@ public class FirstLetterMap
         {
 
             // Create your map here
-            ...
+    
+            Map<Character, String>  wok = new HashMap<>();
+            
 
+            
             while (in.hasNext())
             {
                 String word = clean(in.next());
@@ -27,7 +30,7 @@ public class FirstLetterMap
 
                 // Update the map here
                 // Use the Java 8 merge method
-                . . .
+                wok.put(c, word);
 
             }
 
