@@ -12,13 +12,14 @@ public class StringLengthMap
 {
     public static void main(String[] args) throws FileNotFoundException
     {
-        String filename = "src/test1.txt";
+        String filename = "Chapter 15 Activities\\StringLengthMap\\src\\test1.txt";
 
         try (Scanner in = new Scanner(new File(filename)))
         {
 
             // Create your map here
-            
+            Map<Integer, String> wok = new HashMap<>();
+
 
             while (in.hasNext())
             {
@@ -27,10 +28,15 @@ public class StringLengthMap
 
                 // Update the map here
                 // Modify Worked Example 15.1
-                
-
+                if (wok.get(len) != null){
+                    wok.put(len,wok.get(len) +"," +word);
+                }
+                else{
+                    wok.put(len,word);
+                }
 
             }
+            System.out.println(wok);
 
             // Print the strings, in increasing order of their length
             // Use this format: 1: i, a, i
