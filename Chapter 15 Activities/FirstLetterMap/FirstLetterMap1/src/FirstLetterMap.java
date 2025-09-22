@@ -15,7 +15,7 @@ public class FirstLetterMap {
         try (Scanner in = new Scanner(new File(filename))) {
 
             // Create your map here
-            Map<Character, String> wok = new HashMap<>();
+            Map<Character, String> wok = new TreeMap<>();
 
             while (in.hasNext()) {
                 String word = clean(in.next());

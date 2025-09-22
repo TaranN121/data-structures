@@ -15,23 +15,22 @@ public class FirstLetterMap {
 
         try (Scanner in = new Scanner(new File(filename))) {
 
-            // Create your map here
-            Map<Character, String> wok = new HashMap<>();
+            // Create your map here: keys are Characters, values are sets of Strings
+            Map<Character, Set<String>> wok = new HashMap<>();
 
             while (in.hasNext()) {
                 String word = clean(in.next());
                 Character c = word.charAt(0);
 
-                // Update the map here
-                // Modify Worked Example 15.1
-                if (wok.get(c) != null) {
-                    wok.put(c, wok.get(c) + "," + word);
-                } else {
-                    wok.put(c, word);
-                }
-                System.out.println(wok);
-
+             
+                wok.merge(c, new TreeSet<>(Arrays.asList(word)), (oldValue, newValue) -> {
+                    oldValue.addAll(newValue);
+                    return oldValue;
+                });
             }
+
+          
+            System.out.println(wok);
 
             // Print the map here in this form
             // a: [a, able, aardvark]

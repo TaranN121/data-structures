@@ -22,8 +22,8 @@ public class Driveway
     public Driveway()
     {
         // Complete the constructor
-        ...
-
+         street = new Stack<Integer>();
+         driveway = new Stack<Integer>();
 
     }
 
@@ -35,7 +35,8 @@ public class Driveway
     public void add(int licensePlate)
     {
         // Complete this method
-        ...
+        driveway.push(licensePlate);
+        System.out.println("Car added");
 
 
     }
@@ -48,8 +49,14 @@ public class Driveway
     public void remove(int licensePlate)
     {
         // Complete this method
-        ...
-
+        if (driveway.contains(licensePlate)){
+          while ((driveway.contains(licensePlate))){
+            street.push(driveway.pop());
+          }
+          System.out.println("car removed");
+        }
+        else 
+          System.out.println("not in driveway");
 
     }
 
@@ -60,11 +67,11 @@ public class Driveway
     {
         System.out.println("In Driveway, starting at first in (one license plate per line):");
         // Print the cars in the driveway here
-        ...
+        System.out.println(driveway);
 
         System.out.println("In Street, starting at first in (one license plate per line):");
         // Print the cars in the street here
-        ...
+        System.out.println(street);
 
     }
 }

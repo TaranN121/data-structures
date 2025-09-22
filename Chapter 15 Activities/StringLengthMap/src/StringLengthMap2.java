@@ -12,26 +12,29 @@ public class StringLengthMap2
 {
     public static void main(String[] args)
     {
-        String filename = "src/test1.txt";
+        String filename = "Chapter 15 Activities\\StringLengthMap\\src\\test1.txt";
 
         try (Scanner in = new Scanner(new File(filename)))
         {
 
             // Create your map here
-            
+            Map<Integer, String> wok = new TreeMap<>();
 
             while (in.hasNext())
             {
                 String word = clean(in.next());
                 Integer len = word.length();
+                wok.merge(len,word,(oldValue, newValue) -> oldValue.concat(", "+ word));
 
                 // Update the map here
                 // Use the Java 8 merge() method
-                
-
 
             }
-
+            System.out.println(wok);
+                        //for (Integer len: wok.keyset())
+           // {
+            //    System.out.println(len +": "+wok.get(len));
+            //}
             // Print the strings, in increasing order of their length
             // Use this format: 1: i, a, i
         } catch (FileNotFoundException e)
