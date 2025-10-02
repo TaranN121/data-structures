@@ -22,7 +22,19 @@ public class LinkedListQueue
     */
     public void lastToFirst()
     {
-        . . .
+        if (head == null || tail == null|| head == tail)
+            return;
+        else{
+            Node current = head;
+            while(current.next != tail){
+                current = current.next;
+            }
+            Node tail1 = tail;
+            current.next = null;
+            tail = current;
+            tail1.next = head;
+            head = tail1;
+        }
 
 
 
