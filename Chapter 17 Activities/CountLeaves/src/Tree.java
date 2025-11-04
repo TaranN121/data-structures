@@ -63,5 +63,22 @@ public class Tree
         else { return root.size(); }
     }
 
+    public int leafCount() {
+        if (root == null) {
+            return 0;
+        }
+        return leafCount(root);
+    }
+
+    private int leafCount(Node node) {
+        if (node.children.isEmpty()) {
+            return 1;
+        }
+        int leafCount = 0;
+        for (Node child : node.children) {
+            leafCount += leafCount(child);
+        }
+        return leafCount;
+    }
     // Additional methods will be added in later sections.
 }
