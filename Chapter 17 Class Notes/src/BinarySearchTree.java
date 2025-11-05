@@ -12,6 +12,7 @@ public class BinarySearchTree
     */
     public BinarySearchTree()
     {   
+        this.root = null;
         
     }
     
@@ -20,9 +21,24 @@ public class BinarySearchTree
         @param obj the object to insert
     */
     public void add(Comparable obj) 
-    {   
-        
+    { 
+        if(this.root == null){
+            Node newNode = new Node();
+        newNode.data = obj;
+            this.root = newNode;
+        }  
+        else {}
+        Node newNode = new Node();
+        newNode.data = obj;
+        newNode.left = null;
+        newNode.right = null;
+
+        this.root.addNode(newNode);
     }
+    }
+
+
+
 
     /**
         Tries to find an object in the tree.
@@ -31,6 +47,18 @@ public class BinarySearchTree
     */
     public boolean find(Comparable obj)
     {
+        Node current = this.root;
+        while (current != null){
+            int diff = obj.compareTo(current.data);
+            if (diff == 0)
+                return true;
+            else if (diff < 0){
+                current = current.left;
+            }
+            else{
+                current = current.right;
+            }
+        }
         return false;
     }
     
@@ -41,7 +69,23 @@ public class BinarySearchTree
     */
     public void remove(Comparable obj)
     {
+        Node toBeRemoved = this.root;
+        boolean found;
         
+        while (!found && toBeRemoved != null)
+        {
+            int diff = obj.compareTo(toBeRemoved.data);
+            if (diff == 0)
+                found = true;
+            else if (diff < 0)
+                toBeRemoved = toBeRemoved.left;
+            else
+                toBeRemoved = toBeRemoved.right;
+        }
+        if (!found)
+            return;
+            
+
     }
     
     /**
@@ -67,7 +111,11 @@ public class BinarySearchTree
     */
     static class Node
     {   
-        
+        // A binary search tree must be made of comparable objects
+        public Comparable data;
+       
+        public Node left;
+        public Node right;
 
         /**
             Inserts a new node as a descendant of this node.
@@ -75,10 +123,30 @@ public class BinarySearchTree
         */
         public void addNode(Node newNode)
         {   
-            
+            //if diff  < 0, newNode is to the left of this node
+            //if diff > 0, newNode is to the right of this node
+            int diff = newNode.data.compareTo(this.data);
+
+           if (diff < 0){
+                if(left == null)
+                    left = newNode;
+                else    {
+                    left.addNode(newNode);
+                }
+            }
+            else if (diff > 0)
+            {
+                if (right == null){
+                    right = newNode;
+                }
+                else
+                    right.addNode(newNode);
+            } 
+                
+           }
         }
-    }
-}
+    
+
 
 
 
