@@ -1,8 +1,3 @@
-/**
-    This class implements a binary search tree whose
-    nodes hold objects that implement the Comparable
-    interface.
-*/
 public class BinarySearchTree
 {   
     private Node root;
@@ -71,6 +66,7 @@ public class BinarySearchTree
     {
         Node toBeRemoved = this.root;
         boolean found;
+        Node parent = null;
         
         while (!found && toBeRemoved != null)
         {
@@ -78,6 +74,7 @@ public class BinarySearchTree
             if (diff == 0)
                 found = true;
             else if (diff < 0)
+                parent = toBeRemoved;
                 toBeRemoved = toBeRemoved.left;
             else
                 toBeRemoved = toBeRemoved.right;
@@ -85,7 +82,42 @@ public class BinarySearchTree
         if (!found)
             return;
             
+        //case 1 and case 2 (at least one child is null)
+        if(toBeRemoved.left == null || toBeRemoved.right == null){
+            Node newChild;
 
+            if (toBeRemoved.left == null){
+                newChild = toBeRemoved.right;
+            }
+            else{
+                newChild = toBeRemoved.left;
+            }
+
+            if (parent == null){
+                this.root = newChild;
+            }
+            else{
+                parent.right = newChild;
+                return;
+            }
+            Node leastParent = toBeRemoved;
+            Node least = toBeRemoved.right;
+            while (least.left != null){
+                leastParent = least;
+                least = least.left;
+            }
+            //move the data to the node being removed
+            toBeRemoved.data = least.data;
+
+            //unlink the least child
+            if (leastParent == toBeRemoved){
+                leastParent.right = least.right;
+            }
+            else[
+                leastParent.left = least.right;
+
+            ]
+        }
     }
     
     /**
@@ -93,7 +125,8 @@ public class BinarySearchTree
     */
     public void print()
     {   
-        
+        print(this.root)
+        System.out.println();
     }   
 
     /**
@@ -102,7 +135,13 @@ public class BinarySearchTree
     */
     private static void print(Node parent)
     {   
-        
+        if (parent == null){
+            return;
+        }
+        print(parent.left);
+        System.out.println(parent.data+" ");
+        print(parent.right);
+
     }
 
     /**
@@ -143,9 +182,17 @@ public class BinarySearchTree
                     right.addNode(newNode);
             } 
                 
+           }public void preorder(Visitor v){
+            Tree.preorder(this.root,v);
            }
+           public interface Visitor{
+            void visit(Object data);
+            }
+
+            public static void preorder(Node n,Visitor v){
+
+            }
         }
-    
 
 
 

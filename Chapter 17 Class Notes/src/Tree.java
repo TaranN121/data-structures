@@ -58,5 +58,41 @@ public class Tree
         return root.size();
     }
 
-    // Additional methods will be added in later sections.
+public void depthFirst()
+{
+    System.out.print("Depth-first traversal: ");
+    depthFirst(root);
+    System.out.println();
+}
+
+private void depthFirst(Node node)
+{
+    if (node == null) 
+        return;
+    System.out.print(node.data + " ");     
+    for (Node child : node.children)       
+    {
+        depthFirst(child);
+    }
+}
+
+
+public void postorder()
+{
+    System.out.print("Postorder traversal: ");
+    postorder(root);
+    System.out.println();
+}
+
+private void postorder(Node node)
+{
+    if (node == null) 
+        return;
+    for (Node child : node.children)        
+     postorder(child);
+
+    System.out.print(node.data + " ");      
+}
+
+
 }
