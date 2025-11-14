@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tailwind Demo - Index</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center p-6">
+    <div class="max-w-3xl w-full bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8">
+      <header class="mb-6">
+        <h1 class="text-4xl font-extrabold font-inter text-gray-900 mb-2">Tailwind Demo</h1>
+        <p class="text-sm text-gray-700">Demonstrating font (decoration, family, size, weight), background color, hover states, rounded boxes, an image, and an external link.</p>
+      </header>
+
+      <section class="grid md:grid-cols-2 gap-6 items-start">
+        <!-- Font examples: decoration, family, size, weight -->
+        <div>
+          <h2 class="text-2xl font-semibold underline decoration-wavy decoration-indigo-500 mb-2">Font Styles</h2>
+          <p class="font-inter text-lg font-light mb-1">Family: <span class="font-bold">Inter</span></p>
+          <p class="font-inter text-xl font-medium mb-1">Size: <span class="text-indigo-700">text-xl</span></p>
+          <p class="font-inter text-base font-semibold">Weight: <span class="text-indigo-700">font-semibold</span></p>
+        </div>
+
+        <!-- Rounded box with image and hover state -->
+        <div class="rounded-lg overflow-hidden shadow-md transform transition hover:scale-105">
+          <img src="https://picsum.photos/800/500" alt="Sample scenery" class="w-full h-48 object-cover">
+          <div class="p-4 bg-white">
+            <p class="text-gray-700">This card has rounded corners, a shadow, and a hover scale effect.</p>
+            <a href="https://developer.mozilla.org" target="_blank" rel="noopener" class="inline-block mt-3 text-indigo-600 hover:text-indigo-800 underline">Visit MDN (external link)</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="mt-6 text-right">
+        <a href="https://tailwindcss.com" target="_blank" rel="noopener" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Tailwind Docs</a>
+      </footer>
+    </div>
+  </body>
+</html>
